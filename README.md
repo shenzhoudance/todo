@@ -101,3 +101,46 @@ class TodoItemsController < ApplicationController
 end
 ```
 ![image](https://ws3.sinaimg.cn/large/006tKfTcgy1fpeqwt5novj30ro0bw753.jpg)
+
+```
+app/views/todo_items/_todo_item.html.erb
+---
+<p><%= todo_item.content %></p>
+<%= link_to "Delete",todo_list_todo_item_path(@todo_list,todo_item.id),methed: :delete,data:{ confirm:"are you sure?"} %>
+---
+app/controllers/todo_items_controller.rb
+---
+class TodoItemsController < ApplicationController
+  before_action :set_todo_list
+
+  def create
+    @todo_item = @todo_list.todo_items.create(todo_item_params)
+    redirect_to @todo_list
+  end
+
+  def destory
+    @todo_item = @todo_list.todo_items.find(params[:id])
+    if @todo_item.destroy
+      flash[:success] = "todo list item was delete."
+    else
+      lash[:error] = "todo list item could not be delete."
+    end
+    redirect_to @todo_list
+  end
+
+  private
+    def set_todo_list
+      @todo_list = TodoList.find(params[:todo_list_id])
+  end
+
+    def todo_item_params
+      params[:todo_item].permit(:content)
+  end
+
+end
+---
+```
+```
+git status
+git commit -m "Add Todo Lists & Todo Items"
+git push origin
