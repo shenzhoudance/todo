@@ -1,4 +1,4 @@
-# 才华横溢movie_review教学案例5
+# 才华横溢movie_review教学案例 6
 
 # 第1部分 新建专案
 ```
@@ -42,3 +42,18 @@ rails g model todo_item content:string todo_list:references
 rake db:migrate
 ```
 ![image](https://ws1.sinaimg.cn/large/006tKfTcgy1fpeo1es9dcj31e40jagpw.jpg)
+
+```
+config/routes.rb
+---
+resources :todo_lists do
+  resources :todo_items
+end
+---
+app/models/todo_list.rb
+---
+has_many :todo_lists
+---
+rake routes
+```
+![image](https://ws3.sinaimg.cn/large/006tKfTcgy1fpeomsa49qj31dq0ia793.jpg)
