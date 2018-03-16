@@ -510,3 +510,178 @@ app/views/todo_lists/index.html.erb
 </div>
 ```
 ![image](https://ws3.sinaimg.cn/large/006tKfTcgy1fpetq0gjaoj31c00sckdn.jpg)
+```
+app/views/layouts/application.html.erb
+https://fonts.google.com/
+https://fontawesome.com/how-to-use/svg-with-js
+---
+<head>
+  <title>才华横溢</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+```
+
+```
+app/views/todo_items/_todo_item.html.erb
+---
+<div class="complete">
+  <%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch do %>
+          <i style="opacity: 0.4;" class="fa fa-check"></i>
+        <% end %>
+</div>
+```
+![image](https://ws2.sinaimg.cn/large/006tKfTcgy1fpeuem76lkj31560yank7.jpg)
+```
+<div class="row clearfix">
+  <% if todo_item.completed? %>
+  <div class="complete">
+    <%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch do %>
+    				<i style="opacity: 0.4;" class="fa fa-check"></i>
+    			<% end %>
+  </div>
+
+  <div class="todo_item">
+    <p style="opacity: 0.4;"><strike><%= todo_item.content %></strike></p>
+  </div>
+
+  <div class="trash">
+   <%= link_to "Delete",todo_list_todo_item_path(@todo_list,todo_item.id),methed: :delete,data:{ confirm:"are you sure?"} %>
+  </div>
+  <% else %>
+  <div class="complete">
+    <%= link_to "mark as complete",complete_todo_list_todo_item_path(@todo_list,todo_item.id) ,method: :patch %>
+  </div>
+
+  <div class="todo_item">
+    <p><<%= todo_item.content %>></p>
+  </div>
+
+  <div class="trash">
+   <%= link_to "Delete",todo_list_todo_item_path(@todo_list,todo_item.id),methed: :delete,data:{ confirm:"are you sure?"} %>
+  </div>
+  <% end %>
+</div>
+---
+<div class="row clearfix">
+	<% if todo_item.completed? %>
+		<div class="complete">
+			<%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch do %>
+				<i style="opacity: 0.4;" class="fa fa-check"></i>
+			<% end %>
+		</div>
+		<div class="todo_item">
+			<p style="opacity: 0.4;"><strike><%= todo_item.content %></strike></p>
+		</div>
+		<div class="trash">
+			<%= link_to todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+				<i class="fa fa-trash"></i>
+			<% end %>
+		</div>
+	<% else %>
+		<div class="complete">
+			<%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch do %>
+				<i class="fa fa-check"></i>
+			<% end %>
+		</div>
+		<div class="todo_item">
+			<p><%= todo_item.content %></p>
+		</div>
+		<div class="trash">
+			<%= link_to todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+				<i class="fa fa-trash"></i>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+```
+![image](https://ws2.sinaimg.cn/large/006tKfTcgy1fpeuh19tr3j313o0vgatk.jpg)
+```
+app/views/todo_lists/show.html.erb
+---<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @todo_list.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @todo_list.description %>
+</p>
+
+<div id="todo_items_wrapper">
+  <%= render @todo_list.todo_items %>
+  <div id="form">
+  <%= render "todo_items/form" %>
+  </div>
+<div>
+
+<%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
+<%= link_to 'Back', todo_lists_path %>
+---
+<p id="notice"><%= notice %></p>
+
+<h2 class="todo_list_title"><%= @todo_list.title %></h2>
+<p class="todo_list_sub_title"><%= @todo_list.description %></p>
+
+<div id="todo_items_wrapper">
+	<%= render @todo_list.todo_items %>
+	<div id="form">
+		<%= render "todo_items/form" %>
+	</div>
+</div>
+
+<div class="links">
+	<%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
+	<%= link_to 'Delete', todo_list_path(@todo_list), method: :delete, data: { confirm: "Are you sure?" }
+ %> |
+  <%= link_to 'Back', todo_lists_path %>
+</div>
+```
+![image](https://ws2.sinaimg.cn/large/006tKfTcgy1fpeukhsgxlj314g0xgqnw.jpg)
+
+```
+app/views/todo_lists/new.html.erb
+---
+<h1>New Todo List</h1>
+
+<%= render 'form', todo_list: @todo_list %>
+
+<%= link_to 'Back', todo_lists_path %>
+---
+<h1 class="todo_list_title">New Todo List</h1>
+<div class="forms">
+  <%= render 'form', todo_list: @todo_list %>
+</div>
+
+<div class="links">
+  <%= link_to 'Back', todo_lists_path %>
+</div>
+
+```
+![image](https://ws3.sinaimg.cn/large/006tKfTcgy1fpeuxlrggij315o0rwqjl.jpg)
+
+```
+<h1>Editing Todo List</h1>
+
+<%= render 'form', todo_list: @todo_list %>
+
+<%= link_to 'Show', @todo_list %> |
+<%= link_to 'Back', todo_lists_path %>
+---
+
+<h1 class="todo_list_title">Editing Todo List</h1>
+<div class="forms">
+  <%= render 'form', todo_list: @todo_list %>
+</div>
+
+<div class="links">
+  <%= link_to 'Show', @todo_list %> |
+  <%= link_to 'Back', todo_lists_path %>
+</div>
+```
+![image](https://ws4.sinaimg.cn/large/006tKfTcgy1fpev02fmh9j313o0r8h0s.jpg)
