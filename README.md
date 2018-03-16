@@ -108,6 +108,8 @@ app/views/todo_items/_todo_item.html.erb
 <p><%= todo_item.content %></p>
 <%= link_to "Delete",todo_list_todo_item_path(@todo_list,todo_item.id),methed: :delete,data:{ confirm:"are you sure?"} %>
 ---
+```
+```
 app/controllers/todo_items_controller.rb
 ---
 class TodoItemsController < ApplicationController
@@ -142,5 +144,7 @@ end
 ```
 ```
 git status
+git add .
 git commit -m "Add Todo Lists & Todo Items"
-git push origin
+git push origin todo_list
+```
