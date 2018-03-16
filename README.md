@@ -36,3 +36,9 @@ root 'todo_lists#index'
 http://localhost:3000/
 ```
 ![image](https://ws1.sinaimg.cn/large/006tKfTcgy1fpenuyvgcij30w80f0jsc.jpg)
+
+```
+rails g model todo_item content:string todo_list:references
+rake db:migrate
+```
+![image](https://ws1.sinaimg.cn/large/006tKfTcgy1fpeo1es9dcj31e40jagpw.jpg)
