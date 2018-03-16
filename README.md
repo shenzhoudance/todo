@@ -148,3 +148,9 @@ git add .
 git commit -m "Add Todo Lists & Todo Items"
 git push origin todo_list
 ```
+
+```
+git checkout -b add_completed_at
+rails g migration add_completed_at_to_todo_items completed_at:datetime
+```
+![image](https://ws4.sinaimg.cn/large/006tKfTcgy1fpes13zukjj31kw0h2n19.jpg)
