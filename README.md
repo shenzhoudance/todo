@@ -58,9 +58,12 @@ rake routes
 ```
 ![image](https://ws3.sinaimg.cn/large/006tKfTcgy1fpeomsa49qj31dq0ia793.jpg)
 
+
+
+
 ```
 rails g controller todo_items
-```
+
 class TodoItemsController < ApplicationController
   def create
     @todo_list = TodoList.find(params[:todo_list_id])
