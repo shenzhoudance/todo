@@ -14,6 +14,7 @@ class TodoItemsController < ApplicationController
       lash[:error] = "todo list item could not be delete."
     end
     redirect_to @todo_list
+
   end
 
   def complete
