@@ -16,4 +16,7 @@ atom .
 git status
 git add .
 git commit -m "initial commit"
+git remote add origin https://github.com/shenzhoudance/todo.git
+git push -u origin master
 ```
+![image](https://ws3.sinaimg.cn/large/006tKfTcly1fpenkmb3k0j31kw0x51kx.jpg)
